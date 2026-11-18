@@ -28,16 +28,12 @@
 <a id="start"></a>
 ## 在 Windows 上运行
 
-准备好 Git 和带 npm 的 Node.js，在 PowerShell 中执行以下命令。首次安装需要联网下载 Electron。
+| Windows x64 下载 | 怎样启动 |
+| --- | --- |
+| [一键安装版 · EXE](https://github.com/zhishengplus/ZhishengTag/releases/download/v0.2.0/ZhishengTag-0.2.0-windows-x64-setup.exe) | 双击安装到当前用户，在桌面或开始菜单打开「枳生Ai桌签」。 |
+| [免安装版 · ZIP](https://github.com/zhishengplus/ZhishengTag/releases/download/v0.2.0/ZhishengTag-0.2.0-windows-x64-portable.zip) | 将整个压缩包解压到同一目录，双击里面的 `ZhishengTag.exe`。 |
 
-```powershell
-git clone https://github.com/zhishengplus/ZhishengTag.git
-cd ZhishengTag
-npm ci
-npm start
-```
-
-安装后也可以双击 `Launch-ZhishengTag.cmd`。拿到含 `runtime` 目录的 Windows x64 便携开发包时，解压后直接双击同一个脚本即可。首次打开，打字、贴便签和分段录音都可以先在本机试用。
+两个版本都自带运行环境，打开后即可打字、贴便签和分段录音。录音与便签默认保存在当前 Windows 用户的数据目录。版本记录和文件校验值见 [GitHub Releases](https://github.com/zhishengplus/ZhishengTag/releases)。从源码启动和构建请参阅[开发说明](README-开发.md)。
 
 <a id="models"></a>
 ## 接入自己的模型

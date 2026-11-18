@@ -8,6 +8,17 @@ Windows 桌面工作台。分段录音、语音与文字便签、来源可追溯
 
 从 GitHub 获取的源码请先运行 npm ci，安装锁定版本的 Electron，再运行 npm start。完成首次安装后也可以使用上述两个启动脚本。
 
+## 构建 Windows x64 发行包
+
+在 Windows 上打开项目目录，运行：
+
+```powershell
+npm ci
+npm run dist:win
+```
+
+首次构建会下载打包工具。完成后，`dist/windows` 下的 `*-setup.exe` 是当前用户的一键安装程序，`*-portable.zip` 包含可直接运行的完整目录。若本地已有与锁定版本一致的 Windows x64 Electron 解压目录，可在构建命令末尾加上 `-- --config.electronDist=该目录的绝对路径`。
+
 ## 源码与数据
 
 | 文件 | 职责 |

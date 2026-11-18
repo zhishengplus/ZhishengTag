@@ -10,9 +10,32 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron .",
-    "test": "electron . --smoke-test"
+    "test": "electron . --smoke-test",
+    "dist:win": "electron-builder --win nsis zip --x64 --publish never"
+  },
+  "build": {
+    "appId": "com.zhishengtag.desktop",
+    "directories": { "output": "dist/windows" },
+    "files": [
+      "main.js", "preload.js", "ai.js", "desk.js", "capture.js",
+      "manager.*", "note.*", "theme.css", "assets/**/*", "LICENSE", "使用说明.md"
+    ],
+    "win": {
+      "icon": "assets/app.ico",
+      "artifactName": "ZhishengTag-${version}-windows-${arch}-portable.${ext}"
+    },
+    "nsis": {
+      "artifactName": "ZhishengTag-${version}-windows-${arch}-setup.${ext}",
+      "oneClick": true,
+      "perMachine": false,
+      "shortcutName": "枳生Ai桌签",
+      "createStartMenuShortcut": true,
+      "createDesktopShortcut": true,
+      "deleteAppDataOnUninstall": false
+    }
   },
   "devDependencies": {
-    "electron": "38.8.4"
+    "electron": "38.8.4",
+    "electron-builder": "26.18.0"
   }
 }

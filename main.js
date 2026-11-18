@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const { Desk, dateKey } = require('./desk');
 
-const TEST_MODE = process.argv.includes('--smoke-test');
+const TEST_MODE = !app.isPackaged && process.argv.includes('--smoke-test');
 if (TEST_MODE) app.commandLine.appendSwitch('use-fake-device-for-media-stream');
 app.setName('ZhishengTag');
 const override = process.env.ZHISHENG_TAG_DATA || process.env.PAPER_NOTES_DATA;
