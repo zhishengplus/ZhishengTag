@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <meta name="color-scheme" content="light">
+  <title>枳生Ai桌签 · ZhishengTag</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="note.css">
+</head>
+<body data-color="butter">
+  <main class="note-assembly chassis">
+    <section class="paper bound-paper" id="paper" aria-label="桌面便签">
+      <div class="bindings" aria-hidden="true"><span class="binder-ring"></span><span class="binder-ring"></span><span class="binder-ring"></span><span class="binder-ring"></span></div>
+      <header class="heading" id="drag-handle">
+        <div class="heading-brand"><input id="title" maxlength="160" placeholder="无标题便签" aria-label="便签标题" spellcheck="false"></div>
+        <div class="heading-actions">
+          <button class="icon-button pin-button" id="pin" aria-label="置顶" title="置顶 · Ctrl+Shift+P" aria-pressed="false"><svg><use href="assets/icons.svg#pin"/></svg></button>
+          <button class="icon-button" id="new" aria-label="新建便签" title="新建便签 · Ctrl+N"><svg><use href="assets/icons.svg#plus"/></svg></button>
+          <button class="icon-button" id="more" aria-label="便签设置" title="便签设置" aria-expanded="false"><svg><use href="assets/icons.svg#dots"/></svg></button>
+          <button class="icon-button close-button" id="close" aria-label="收起便签" title="收起便签"><svg><use href="assets/icons.svg#close"/></svg></button>
+        </div>
+      </header>
+
+      <div class="editor-scroll" id="editor-scroll">
+        <div id="editor" contenteditable="true" role="textbox" aria-multiline="true" aria-label="便签正文" data-placeholder="写下想记的事…" spellcheck="true"></div>
+      </div>
+      <footer class="statusbar">
+        <span class="save-state" id="save-state"><span id="save-text">正在打开</span></span>
+        <span class="char-count" id="char-count">0 字</span>
+      </footer>
+    </section>
+
+    <div class="toolbar">
+      <div class="format-tools" role="toolbar" aria-label="文字格式">
+        <button class="icon-button format" aria-pressed="false" data-command="bold" title="加粗 · Ctrl+B" aria-label="加粗"><svg><use href="assets/icons.svg#bold"/></svg></button>
+        <button class="icon-button format" aria-pressed="false" data-command="italic" title="斜体 · Ctrl+I" aria-label="斜体"><svg><use href="assets/icons.svg#italic"/></svg></button>
+        <button class="icon-button format" aria-pressed="false" data-command="underline" title="下划线 · Ctrl+U" aria-label="下划线"><svg><use href="assets/icons.svg#underline"/></svg></button>
+        <button class="icon-button format" aria-pressed="false" data-command="strikeThrough" title="删除线" aria-label="删除线"><svg><use href="assets/icons.svg#strike"/></svg></button>
+        <button class="icon-button format" aria-pressed="false" data-command="insertUnorderedList" title="项目符号" aria-label="项目符号"><svg><use href="assets/icons.svg#list"/></svg></button>
+        <button class="icon-button format" aria-pressed="false" data-command="formatBlock" data-value="blockquote" title="引用" aria-label="引用"><svg><use href="assets/icons.svg#quote"/></svg></button>
+        <button class="icon-button format" data-command="undo" title="撤销 · Ctrl+Z" aria-label="撤销"><svg><use href="assets/icons.svg#undo"/></svg></button>
+        <button class="icon-button format" data-command="redo" title="重做 · Ctrl+Y" aria-label="重做"><svg><use href="assets/icons.svg#redo"/></svg></button>
+      </div>
+      <button class="icon-button color-trigger" id="color" aria-label="选择纸张颜色" title="纸张颜色" aria-expanded="false"><span class="color-dot"></span></button>
+      <section class="popover color-popover" id="color-popover" hidden aria-label="纸张颜色">
+        <div class="popover-caption">纸张颜色</div>
+        <div class="swatches">
+          <button class="swatch" data-color="butter" aria-label="琥珀黄" title="琥珀黄"><svg><use href="assets/icons.svg#check"/></svg></button>
+          <button class="swatch" data-color="rose" aria-label="砖红" title="砖红"><svg><use href="assets/icons.svg#check"/></svg></button>
+          <button class="swatch" data-color="sky" aria-label="钴蓝" title="钴蓝"><svg><use href="assets/icons.svg#check"/></svg></button>
+          <button class="swatch" data-color="sage" aria-label="灰绿" title="灰绿"><svg><use href="assets/icons.svg#check"/></svg></button>
+          <button class="swatch" data-color="lilac" aria-label="铅灰" title="铅灰"><svg><use href="assets/icons.svg#check"/></svg></button>
+          <button class="swatch" data-color="linen" aria-label="原纸" title="原纸"><svg><use href="assets/icons.svg#check"/></svg></button>
+        </div>
+      </section>
+    </div>
+    <div class="note-inputs">
+      <button id="voice" class="key key-plain"><svg><use href="assets/icons.svg#mic"/></svg><span id="voice-label">听写</span></button>
+      <button id="organize" class="key key-organize"><svg><use href="assets/icons.svg#arrange"/></svg>整理</button>
+    </div>
+  </main>
+  <div class="resize-grip" id="resize-grip" title="拖动调整大小" aria-hidden="true"></div>
+
+  <section class="popover settings-popover" id="settings" hidden aria-label="便签设置">
+    <div class="setting-row"><span>正文字号</span><div class="stepper"><button id="font-down" aria-label="减小字号">−</button><output id="font-size">16</output><button id="font-up" aria-label="增大字号">+</button></div></div>
+    <button class="menu-item" id="manage"><svg><use href="assets/icons.svg#grid"/></svg><span>打开工作台</span></button>
+    <button class="menu-item" id="ai-setup"><svg><use href="assets/icons.svg#plug"/></svg><span>模型设置</span></button>
+    <button class="menu-item" id="export"><svg><use href="assets/icons.svg#download"/></svg><span>备份全部便签</span></button>
+    <button class="menu-item danger" id="remove"><svg><use href="assets/icons.svg#trash"/></svg><span>移到回收站</span></button>
+  </section>
+  <dialog id="result-dialog" aria-labelledby="result-title">
+    <div class="dialog-body">
+      <header><h2 id="result-title">整理预览</h2><button type="button" class="icon-button" id="result-close" aria-label="关闭预览"><svg><use href="assets/icons.svg#close"/></svg></button></header>
+      <p class="form-message" id="result-status" role="status"></p>
+      <div class="result-content" id="result-content"></div>
+      <div class="result-actions">
+        <button class="key key-blue" id="apply-report" hidden>应用整理</button>
+        <button class="key key-plain" id="apply-voice" hidden>插入原文</button>
+        <button class="key key-plain" id="retry-voice" hidden>重试听写整理</button>
+        <button class="text-button" id="result-setup" hidden>打开模型设置</button>
+      </div>
+    </div>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="capture.js"></script>
+  <script src="note.js"></script>
+</body>
+</html>

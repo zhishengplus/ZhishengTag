@@ -1,0 +1,13 @@
+node_modules/
+runtime/
+.smoke-data/
+.dev-data/
+dist/
+*.log
+.env
+.env.*
+recordings/
+ai-settings.json
+notes.json
+notes.backup.json
+desk.json

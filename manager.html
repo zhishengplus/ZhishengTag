@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; img-src 'self' data:; media-src 'self' blob:; connect-src 'none'; object-src 'none'; base-uri 'none'; frame-src 'none'">
+  <meta name="color-scheme" content="light">
+  <title>枳生Ai桌签 · ZhishengTag</title>
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="manager.css">
+</head>
+<body>
+  <header class="window-bar">
+    <div class="window-controls">
+      <button id="minimize" aria-label="最小化" title="最小化"><svg><use href="assets/icons.svg#minimize"/></svg></button>
+      <button id="maximize" aria-label="最大化或还原" title="最大化或还原"><svg><use href="assets/icons.svg#maximize"/></svg></button>
+      <button id="close" aria-label="收起到托盘" title="收起到托盘"><svg><use href="assets/icons.svg#close"/></svg></button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#workbench" data-page="workbench" aria-label="枳生Ai桌签工作台">
+        <img src="assets/brand.svg" alt="">
+        <span class="brand-type"><strong>枳生<span>Ai桌签</span></strong><span lang="en">ZhishengTag</span></span>
+      </a>
+      <nav class="primary-nav" aria-label="工作区">
+        <button data-page="workbench" aria-current="page" aria-label="工作台" title="工作台"><svg><use href="assets/icons.svg#grid"/></svg><span>工作台</span><span class="nav-record" id="nav-record" hidden></span></button>
+        <button data-page="notes" aria-label="便签簿" title="便签簿"><svg><use href="assets/icons.svg#note"/></svg><span>便签簿</span></button>
+        <button data-page="plans" aria-label="计划" title="计划"><svg><use href="assets/icons.svg#calendar"/></svg><span>计划</span></button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="side-link settings-link" data-page="settings" aria-label="模型设置" title="模型设置"><svg><use href="assets/icons.svg#sliders"/></svg><span>模型设置</span></button>
+        <button class="side-link" id="data-folder" aria-label="打开数据目录" title="打开数据目录"><svg><use href="assets/icons.svg#folder"/></svg><span>数据目录</span></button>
+        <button class="side-link" id="shortcuts" aria-label="快捷键" title="快捷键"><svg><use href="assets/icons.svg#keys"/></svg><span>快捷键</span></button>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <section data-panel="workbench" id="workbench" aria-labelledby="workbench-title">
+        <header class="page-heading">
+          <h1 id="workbench-title">工位桌签</h1>
+          <button class="key key-plain" id="new" title="新建便签 · Ctrl+N"><svg><use href="assets/icons.svg#plus"/></svg>新建便签<kbd aria-hidden="true">Ctrl N</kbd></button>
+        </header>
+
+        <div class="workbench-grid chassis">
+          <section class="quick-panel bound-paper" aria-labelledby="quick-title">
+            <div class="bindings" aria-hidden="true"><span class="binder-ring"></span><span class="binder-ring"></span><span class="binder-ring"></span><span class="binder-ring"></span></div>
+            <header class="quick-head"><h2 id="quick-title">随手记</h2><time class="date-plate"><span id="wall-date"></span><span id="wall-weekday"></span></time></header>
+            <form id="quick-form">
+              <label for="quick-text" class="sr-only">输入工位便签正文</label>
+              <textarea id="quick-text" rows="5" maxlength="12000" placeholder="写下想记的事…" spellcheck="true"></textarea>
+              <footer class="quick-footer">
+                <div class="draft-meta"><span id="draft-state" role="status">草稿</span><span id="draft-count">0 字</span></div>
+                <div class="quick-actions">
+                  <button type="submit" value="organize" class="key key-organize"><svg><use href="assets/icons.svg#arrange"/></svg>整理</button>
+                  <button type="submit" value="pin" class="key key-ink" title="贴到桌面 · Ctrl+Enter"><svg><use href="assets/icons.svg#pin"/></svg>贴到桌面</button>
+                </div>
+              </footer>
+            </form>
+          </section>
+
+          <section class="recorder-module" aria-labelledby="recorder-title">
+            <header class="module-head"><h2 id="recorder-title"><svg><use href="assets/icons.svg#mic"/></svg>工位录音</h2><button class="icon-button" id="capture-settings" data-page="settings" data-open-settings="recording" aria-label="录音设置" title="录音设置"><svg><use href="assets/icons.svg#sliders"/></svg></button></header>
+            <div class="recorder" id="recorder" data-state="idle" aria-label="录音控制">
+              <div class="recorder-display">
+                <div class="display-head"><output class="counter" id="capture-time" aria-live="off" aria-label="录音用时">00:00:00</output><span class="rec-indicator"><i aria-hidden="true"></i><span id="capture-state" role="status">待机</span></span></div>
+                <div class="meter-wrap">
+                  <div class="meter" id="meter" role="meter" aria-label="麦克风电平" aria-valuemin="-72" aria-valuemax="0" aria-valuenow="-72"></div>
+                  <div class="meter-scale" aria-hidden="true"><span>−72</span><span>−48</span><span>−24</span><span>0 dB</span></div>
+                </div>
+              </div>
+              <div class="recorder-controls">
+                <label class="interval-label" for="interval">分段间隔
+                  <select id="interval" aria-label="分段间隔"><option value="60">1 分钟</option><option value="180" selected>3 分钟</option><option value="300">5 分钟</option><option value="600">10 分钟</option></select>
+                </label>
+                <div class="deck-keys">
+                  <button class="key key-record" id="record" type="button"><span class="record-symbol" aria-hidden="true"></span><span id="record-label">开始录音</span></button>
+                  <button class="key" id="cut" aria-label="切段" title="切段" disabled><svg><use href="assets/icons.svg#split"/></svg><span>切段</span></button>
+                  <button class="key" id="stop" aria-label="结束录音" title="结束录音" disabled><svg><use href="assets/icons.svg#stop"/></svg><span>结束</span></button>
+                </div>
+              </div>
+            </div>
+            <p class="capture-feedback" id="capture-info" role="status">录音保存在本机</p>
+          </section>
+          <section class="daily-panel panel" aria-labelledby="daily-title">
+            <header class="module-head"><h2 id="daily-title"><svg><use href="assets/icons.svg#calendar"/></svg>每日计划</h2><button class="icon-button" data-page="plans" aria-label="打开全部计划" title="打开全部计划"><svg><use href="assets/icons.svg#arrow-right"/></svg></button></header>
+            <div class="daily-date"><div class="day-switch segmented" role="group" aria-label="选择计划日期"><button data-day="today" aria-pressed="true">今天</button><button data-day="tomorrow" aria-pressed="false">明天</button></div><span id="daily-count"></span></div>
+            <div id="daily-items" class="daily-items"></div>
+            <footer class="daily-actions"><button id="daily-add" class="text-button"><svg><use href="assets/icons.svg#plus"/></svg>添加待办</button><button id="daily-generate" class="text-button"><svg><use href="assets/icons.svg#arrange"/></svg>编排计划</button></footer>
+          </section>
+        </div>
+        <section class="timeline panel" aria-labelledby="timeline-title">
+          <header class="panel-head">
+            <div class="section-title"><h2 id="timeline-title">录音时间轴</h2><span id="timeline-count" class="section-count" hidden></span></div>
+            <select id="session-select" aria-label="选择录音档案"><option value="">录音档案</option></select>
+          </header>
+          <div class="timeline-list" id="timeline-list"></div>
+          <button class="key key-plain more-clips" id="more-clips" hidden>载入更早片段</button>
+        </section>
+      </section>
+
+      <section data-panel="notes" id="notes" aria-labelledby="notes-title" hidden>
+        <header class="page-heading"><h1 id="notes-title">便签簿</h1><button data-new-note class="key key-ink"><svg><use href="assets/icons.svg#plus"/></svg>新建便签</button></header>
+        <div class="list-actions">
+          <div class="segmented library-tabs" aria-label="便签分类">
+            <button data-tab="all" aria-pressed="true">全部 <span id="all-count"></span></button>
+            <button data-tab="pinned" aria-pressed="false">置顶 <span id="pinned-count"></span></button>
+            <button data-tab="trash" aria-pressed="false">回收站 <span id="trash-count"></span></button>
+          </div>
+          <div class="list-controls">
+            <label class="search"><svg><use href="assets/icons.svg#search"/></svg><input id="search" type="search" placeholder="搜索便签" aria-label="搜索便签"></label>
+            <button id="show-all" class="key key-plain">全部展开</button>
+            <button id="export" class="key key-plain" title="备份全部便签"><svg><use href="assets/icons.svg#download"/></svg>备份</button>
+          </div>
+        </div>
+        <div class="notes-grid" id="notes-grid"></div>
+      </section>
+
+      <section data-panel="plans" id="plans" aria-labelledby="plans-title" hidden>
+        <header class="page-heading"><h1 id="plans-title">计划</h1><button id="new-task" class="key key-ink"><svg><use href="assets/icons.svg#plus"/></svg>新建待办</button></header>
+        <section class="panel plan-sheet">
+          <header class="panel-head plan-head">
+            <div class="day-switch segmented" aria-label="计划范围"><button data-day="today" aria-pressed="true">今天</button><button data-day="tomorrow" aria-pressed="false">明天</button><button data-day="short" aria-pressed="false">短期</button><button data-day="long" aria-pressed="false">长期</button><button data-day="all" aria-pressed="false">全部</button></div>
+            <button id="plan-generate" class="key key-organize"><svg><use href="assets/icons.svg#arrange"/></svg>编排计划</button>
+          </header>
+          <div class="plan-caption"><h2 id="plan-period"></h2><span class="section-count" id="plan-count"></span></div>
+          <div id="plan-items" class="plan-items"></div>
+        </section>
+      </section>
+
+      <section data-panel="settings" id="settings" aria-labelledby="settings-title" hidden>
+        <header class="page-heading"><h1 id="settings-title">模型设置</h1></header>
+        <div class="settings-tabs" role="tablist" aria-label="设置分类">
+          <button id="tab-services" role="tab" aria-controls="settings-services" aria-selected="true" tabindex="0">服务商与模型</button>
+          <button id="tab-routing" role="tab" aria-controls="settings-routing" aria-selected="false" tabindex="-1">模型分工</button>
+          <button id="tab-recording" role="tab" aria-controls="settings-recording" aria-selected="false" tabindex="-1">录音设置</button>
+        </div>
+        <section class="panel provider-panel" id="settings-services" role="tabpanel" aria-labelledby="tab-services">
+          <div class="provider-body">
+            <div class="provider-directory"><h2>服务商</h2><nav class="provider-list" id="provider-list" aria-label="服务商预设"></nav></div>
+            <div class="provider-detail">
+              <header class="panel-head"><h2 id="provider-state">OpenAI</h2><span class="section-count" id="provider-status"></span></header>
+              <form id="provider-form" class="provider-form">
+                <label>API 地址<input id="provider-base" type="url" required autocomplete="off" spellcheck="false"></label>
+                <label id="workspace-field" hidden>百炼工作空间 ID<input id="provider-workspace" autocomplete="off" spellcheck="false"><small>百炼的实时模型目录按工作空间与地域查询。</small></label>
+                <label>API Key<input id="provider-key" type="password" autocomplete="off" spellcheck="false"><small id="key-hint">密钥由 Windows 加密保存在本机。</small></label>
+                <label id="text-model-field">文字整理模型<input id="provider-text" list="text-models" autocomplete="off" spellcheck="false" placeholder="选择预设或输入模型 ID"><datalist id="text-models"></datalist></label>
+                <label id="speech-model-field">语音转写模型<input id="provider-speech" list="speech-models" autocomplete="off" spellcheck="false" placeholder="选择预设或输入模型 ID"><datalist id="speech-models"></datalist></label>
+                <label id="fetched-field" hidden>已获取的模型<select id="fetched-models"></select></label>
+                <div class="form-actions">
+                  <button type="submit" class="key key-ink" id="save-provider">保存服务商</button>
+                  <button type="button" class="key key-plain" id="fetch-models">获取模型</button>
+                  <button type="button" class="text-button" id="open-routing" hidden>前往模型分工<svg><use href="assets/icons.svg#arrow-right"/></svg></button>
+                </div>
+                <button type="button" class="text-button danger" id="clear-key" hidden>移除已保存密钥</button>
+                <p class="form-message" id="provider-message" role="status"></p>
+              </form>
+            </div>
+          </div>
+        </section>
+        <section class="panel settings-sheet" id="settings-routing" role="tabpanel" aria-labelledby="tab-routing" hidden>
+          <header class="panel-head"><h2>模型分工</h2></header>
+          <form class="stack-form" id="routing-form">
+            <label>文字整理、标题与计划<select id="route-write"></select></label>
+            <label>转录策略<select id="route-director"></select></label>
+            <label>语音转写<select id="route-speech"></select></label>
+            <button type="submit" class="key key-ink">启用所选模型</button>
+            <p class="field-help">启用后，需要整理的文字和录音会发送到所选服务商。</p>
+          </form>
+        </section>
+        <section class="panel settings-sheet" id="settings-recording" role="tabpanel" aria-labelledby="tab-recording" hidden>
+          <header class="panel-head"><h2>分段处理</h2></header>
+          <form class="stack-form" id="recording-form">
+            <label class="field-check"><input id="auto-process" type="checkbox">逐段自动整理</label>
+            <label class="field-check"><input id="skip-silence" type="checkbox">安静片段只存本机</label>
+            <label>记录主题与术语<textarea id="record-context" rows="3" maxlength="1000" placeholder="例如：周会，项目代号 ZT，中英混录"></textarea><small>下一次录音或听写会使用此内容指导转录。</small></label>
+            <button type="submit" class="key key-ink">保存录音设置</button>
+          </form>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="task-dialog">
+    <form id="task-form" class="dialog-body">
+      <header><h2 id="task-dialog-title">新建待办</h2><button type="button" class="icon-button" data-close-dialog aria-label="关闭"><svg><use href="assets/icons.svg#close"/></svg></button></header>
+      <label>事项<input id="task-title" maxlength="120" required></label>
+      <label>类型<select id="task-horizon"><option value="short">短期</option><option value="long">长期</option></select></label>
+      <div class="field-pair"><label>日期<input id="task-date" type="date"></label><label>时间<input id="task-time" type="time"></label></div>
+      <div id="task-source" class="task-source"></div>
+      <button type="submit" class="key key-blue">保存待办</button>
+    </form>
+  </dialog>
+  <dialog id="help-dialog">
+    <section class="dialog-body">
+      <header><h2>快捷键</h2><button type="button" class="icon-button" data-close-dialog aria-label="关闭"><svg><use href="assets/icons.svg#close"/></svg></button></header>
+      <dl class="shortcut-list"><div><dt>新建便签</dt><dd><kbd>Ctrl N</kbd></dd></div><div><dt>随手记贴到桌面</dt><dd><kbd>Ctrl Enter</kbd></dd></div><div><dt>搜索便签</dt><dd><kbd>Ctrl F</kbd></dd></div><div><dt>保存便签</dt><dd><kbd>Ctrl S</kbd></dd></div><div><dt>置顶便签</dt><dd><kbd>Ctrl Shift P</kbd></dd></div><div><dt>加粗、斜体、下划线</dt><dd><kbd>Ctrl B / I / U</kbd></dd></div><div><dt>收起便签</dt><dd><kbd>Esc</kbd></dd></div></dl>
+    </section>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="capture.js"></script>
+  <script src="manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "name": "zhishengtag",
+  "productName": "ZhishengTag",
+  "version": "0.2.0",
+  "description": "枳生Ai桌签，带分段录音、语音便签和工作计划的 Windows 桌面应用",
+  "main": "main.js",
+  "private": true,
+  "author": "ZhishengTag",
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron .",
+    "test": "electron . --smoke-test"
+  },
+  "devDependencies": {
+    "electron": "38.8.4"
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "app": "ZhishengTag",
+  "version": "0.2.0",
+  "result": "PASS",
+  "testedAt": "2026-11-18T09:52:02.599Z",
+  "phases": [
+    [
+      {
+        "name": "真实窗口启动与中文界面",
+        "result": "PASS",
+        "detail": "344×440"
+      },
+      {
+        "name": "桌面便签最小与宽幅布局、格式键和纸色弹层",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "中文输入、富文本与自动保存",
+        "result": "PASS",
+        "detail": "<div><b>买一束花</b></div><div>给久违的朋友打个电话</div>"
+      },
+      {
+        "name": "纯文本输入保存与格式白名单",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "纸张颜色、字号与原生置顶",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "窗口移动与尺寸持久化",
+        "result": "PASS",
+        "detail": "{\"width\":390,\"height\":480,\"x\":1499,\"y\":63}"
+      },
+      {
+        "name": "多窗口新建与脚本注入防护",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "管理页总览、搜索与置顶筛选",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "回收站隐藏、列表展示与完整还原",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "完整 JSON 备份（自动化指定保存路径）",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "关闭不删除与全部展开",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "原子数据文件与上一版本备份",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "三种工位窗口、最小尺寸四个页面与设置页键盘切换",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "实时模型目录、分工路由和 Windows 密钥加密",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "每日计划快捷添加、日期联动和待办统计",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "录音、暂停、恢复、切段、策略指导、实时摘要、期限归纳与计划",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "环装工位草稿、窄窗口布局与一键整理",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "文字预览、来源校验、任务去重与列表 AI 改标题",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "纸页字数、快捷贴出和便签簿呈现",
+        "result": "PASS",
+        "detail": ""
+      },
+      {
+        "name": "便签听写、本地 WAV 转换与原文追加",
+        "result": "PASS",
+        "detail": ""
+      }
+    ],
+    [
+      {
+        "name": "真实进程重启后内容、格式、颜色、置顶、尺寸、位置与回收站还原均保留",
+        "result": "PASS",
+        "detail": "{\"width\":390,\"height\":480,\"x\":1499,\"y\":63}"
+      },
+      {
+        "name": "真实进程重启后录音、转写、计划、完成状态和草稿均保留",
+        "result": "PASS",
+        "detail": ""
+      }
+    ]
+  ],
+  "runtime": {
+    "node": "22.22.0",
+    "acorn": "8.15.0",
+    "ada": "2.9.2",
+    "amaro": "1.1.4",
+    "ares": "1.34.6",
+    "brotli": "1.0.9",
+    "cjs_module_lexer": "2.1.0",
+    "cldr": "44.1",
+    "icu": "74.2",
+    "llhttp": "9.3.0",
+    "modules": "139",
+    "napi": "10",
+    "nbytes": "0.1.1",
+    "ncrypto": "0.0.1",
+    "nghttp2": "1.64.0",
+    "openssl": "0.0.0",
+    "simdjson": "3.13.0",
+    "simdutf": "7.3.3",
+    "sqlite": "3.50.4",
+    "tz": "2025b",
+    "undici": "6.23.0",
+    "unicode": "15.1",
+    "uv": "1.51.0",
+    "uvwasi": "0.0.23",
+    "v8": "14.0.365.10-electron.0",
+    "zlib": "1.3.1",
+    "zstd": "1.5.8",
+    "electron": "38.8.4",
+    "chrome": "140.0.7339.249"
+  }
+}
